@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Support</title>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #0a0a0f;
+  --surface: #111118;
+  --surface-raised: #181820;
+  --border: rgba(255,255,255,0.04);
+  --border-hover: rgba(255,255,255,0.08);
+  --text: #f5f5f7;
+  --text-muted: #6b6b7b;
+  --text-dim: #4a4a5a;
+  --accent-warm: #c9a96e;
+  --success: #5c9c6e;
+  --font: 'DM Sans', -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  -webkit-tap-highlight-color: transparent;
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--text-dim); border-radius: 3px; }
+
+.hero {
+  position: relative;
+  padding: 56px 24px 32px;
+  text-align: center;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -200px; left: 50%;
+  transform: translateX(-50%);
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(201,169,110,0.06), transparent 60%);
+  pointer-events: none;
+}
+
+.hero-avatar {
+  width: 80px; height: 80px;
+  margin: 0 auto 20px;
+  border-radius: 24px;
+  background: linear-gradient(145deg, var(--surface-raised), var(--surface));
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.03);
+}
+
+.hero-avatar .material-icons-round {
+  font-size: 32px;
+  color: var(--accent-warm);
+}
+
+.hero h1 {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  line-height: 1.2;
+}
+
+.hero h1 span {
+  color: var(--accent-warm);
+  font-weight: 500;
+}
+
+.hero p {
+  margin-top: 10px;
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.5;
+  max-width: 280px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.content {
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 0 20px 40px;
+}
+
+.featured {
+  background: linear-gradient(145deg, var(--surface-raised), var(--surface));
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 24px;
+  margin-bottom: 12px;
+  position: relative;
+  overflow: hidden;
+}
+
+.featured::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(201,169,110,0.3), transparent);
+}
+
+.featured-label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--accent-warm);
+  margin-bottom: 16px;
+}
+
+.featured-qr {
+  width: 160px; height: 160px;
+  margin: 0 auto 20px;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: white;
+  padding: 8px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.featured-qr:hover {
+  transform: scale(1.02);
+}
+
+.featured-qr:active {
+  transform: scale(0.98);
+}
+
+.featured-qr img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+  display: block;
+  pointer-events: none;
+  -webkit-user-drag: none;
+  user-select: none;
+}
+
+.featured-title {
+  font-size: 18px;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 4px;
+}
+
+.featured-sub {
+  font-size: 13px;
+  color: var(--text-muted);
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.featured-address {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 4px 4px 4px 16px;
+}
+
+.featured-address .addr {
+  flex: 1;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  letter-spacing: -0.2px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.grid-item {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px 16px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+
+.grid-item:hover {
+  background: var(--surface-raised);
+  border-color: var(--border-hover);
+  transform: translateY(-2px);
+}
+
+.grid-item:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.grid-item .icon {
+  width: 65px; height: 65px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 14px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+}
+
+.grid-item .icon .material-icons-round {
+  font-size: 60px;
+}
+
+.grid-item .name {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.grid-item .net {
+  font-size: 11px;
+  color: var(--text-dim);
+  font-weight: 500;
+}
+
+.btn {
+  border: none;
+  font-family: var(--font);
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.btn-ghost {
+  padding: 10px 14px;
+  background: transparent;
+  color: var(--text-muted);
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  font-size: 12px;
+}
+
+.btn-ghost:hover {
+  border-color: var(--border-hover);
+  color: var(--text);
+}
+
+.btn-primary {
+  padding: 12px 18px;
+  background: var(--text);
+  color: var(--bg);
+  border-radius: 12px;
+  font-size: 12px;
+}
+
+.btn-primary:hover {
+  background: var(--accent-warm);
+}
+
+.btn-primary:active {
+  transform: scale(0.97);
+}
+
+.footer {
+  text-align: center;
+  padding: 24px 20px 40px;
+  color: var(--text-dim);
+  font-size: 12px;
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.footer .material-icons-round {
+  font-size: 14px;
+  vertical-align: middle;
+  margin-right: 4px;
+  color: var(--text-muted);
+}
+
+/* ===== POPUP MODAL ===== */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(8px);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.modal-overlay.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-card {
+  background: linear-gradient(145deg, var(--surface-raised), var(--surface));
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 32px 28px;
+  max-width: 340px;
+  width: 100%;
+  text-align: center;
+  position: relative;
+  transform: scale(0.9) translateY(20px);
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 24px 80px rgba(0,0,0,0.5);
+}
+
+.modal-overlay.show .modal-card {
+  transform: scale(1) translateY(0);
+}
+
+.modal-icon {
+  width: 64px; height: 64px;
+  border-radius: 20px;
+  background: linear-gradient(145deg, rgba(92,156,110,0.15), rgba(92,156,110,0.05));
+  border: 1px solid rgba(92,156,110,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+}
+
+.modal-icon .material-icons-round {
+  font-size: 32px;
+  color: var(--success);
+}
+
+.modal-title {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.modal-body {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+.modal-body strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.modal-address {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 14px 16px;
+  margin-bottom: 20px;
+  text-align: left;
+  position: relative;
+}
+
+.modal-address label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--text-dim);
+  display: block;
+  margin-bottom: 6px;
+}
+
+.modal-address .addr-text {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-muted);
+  word-break: break-all;
+  line-height: 1.5;
+  letter-spacing: -0.2px;
+  padding-right: 36px;
+}
+
+.modal-address .copy-mini {
+  position: absolute;
+  top: 10px; right: 10px;
+  width: 28px; height: 28px;
+  border-radius: 8px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.modal-address .copy-mini:hover {
+  border-color: var(--border-hover);
+}
+
+.modal-address .copy-mini .material-icons-round {
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.modal-btn {
+  width: 100%;
+  padding: 14px;
+  background: var(--text);
+  color: var(--bg);
+  border: none;
+  border-radius: 14px;
+  font-family: var(--font);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.modal-btn:hover {
+  background: var(--accent-warm);
+}
+
+.modal-btn:active {
+  transform: scale(0.97);
+}
+
+.modal-btn .material-icons-round {
+  font-size: 18px;
+}
+
+.toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(80px);
+  background: var(--surface-raised);
+  color: var(--text);
+  padding: 12px 20px;
+  border-radius: 14px;
+  font-size: 13px;
+  font-weight: 600;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+  border: 1px solid var(--border);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.toast .material-icons-round {
+  font-size: 16px;
+  color: var(--success);
+}
+
+@media (max-width: 400px) {
+  .hero { padding: 40px 20px 24px; }
+  .hero h1 { font-size: 24px; }
+  .grid { gap: 8px; }
+  .grid-item { padding: 20px 12px; }
+  .grid-item .icon { width: 48px; height: 48px; }
+  .grid-item .icon .material-icons-round { font-size: 24px; }
+  .featured { padding: 20px; }
+  .modal-card { padding: 24px 20px; }
+}
+
+.coin-bnb .icon, .coin-bep20 .icon, .coin-binance .icon { color: #f0b90b; }
+.coin-btc .icon { color: #f7931a; }
+.coin-eth .icon { color: #627eea; }
+.coin-sol .icon { color: #9945ff; }
+.coin-ton .icon { color: #0088cc; }
+.coin-ltc .icon { color: #bfbbbb; }
+.coin-trc .icon { color: #ff060a; }
+</style>
+<base target="_blank">
+<base target="_blank">
+</head>
+
+<body>
+
+<div class="hero">
+  <div class="hero-avatar">
+    <span class="material-icons-round">volunteer_activism</span>
+  </div>
+  <h1>Support <span>My Work</span></h1>
+  <p>Tap any card to copy the address instantly. Tap the QR to save it.</p>
+</div>
+
+<div class="content">
+
+  <div class="featured">
+    <div class="featured-label">Quick Pay</div>
+    <div class="featured-qr" id="qr-wrap">
+      <img src="images/binance.png" alt="Binance QR">
+    </div>
+    <div class="featured-title">Binance Pay</div>
+    <div class="featured-sub">Scan or copy the ID below</div>
+    <div class="featured-address">
+      <span class="addr">1139730404</span>
+      <button class="btn btn-ghost copy-btn" data="69695263">
+        <span class="material-icons-round" style="font-size:14px">content_copy</span>
+        Copy
+      </button>
+    </div>
+  </div>
+
+  <div class="grid" id="grid"></div>
+
+</div>
+
+<div class="footer">
+  <span class="material-icons-round">shield</span>
+  Secure & Anonymous Transactions
+</div>
+
+<div class="toast" id="toast">
+  <span class="material-icons-round">check_circle</span>
+  <span id="toast-text">Copied</span>
+</div>
+
+<!-- POPUP MODAL -->
+<div class="modal-overlay" id="modal">
+  <div class="modal-card">
+    <div class="modal-icon">
+      <span class="material-icons-round">check_circle</span>
+    </div>
+    <div class="modal-title" id="modal-title">Address Copied</div>
+    <div class="modal-body" id="modal-body">
+      The <strong id="modal-coin">Bitcoin</strong> address has been copied to your clipboard.<br><br>
+      Open your wallet or exchange app and paste it to send funds.
+    </div>
+    <div class="modal-address">
+      <label>Wallet Address</label>
+      <div class="addr-text" id="modal-addr">bc1p...</div>
+      <div class="copy-mini" id="modal-copy-btn" title="Copy again">
+        <span class="material-icons-round">content_copy</span>
+      </div>
+    </div>
+    <button class="modal-btn" id="modal-close">
+      <span class="material-icons-round">done</span>
+      Got it
+    </button>
+  </div>
+</div>
+
+<script>
+const data = [
+  { id: 'trc20', label: 'USDT', sub: 'TRC20', address: 'TUXkbbXFmBR7xToW2dg7p7c7RpdgDdMiFb', icon: 'currency_bitcoin', cls: 'coin-trc' },
+  { id: 'bep20', label: 'USDT', sub: 'BEP20', address: '0xcb99F30f47C44943d3098B7D7F97F3D3ef529B48', icon: 'token', cls: 'coin-bep20' },
+  { id: 'bnb', label: 'BNB', sub: 'BSC', address: '0xcb99F30f47C44943d3098B7D7F97F3D3ef529B48', icon: 'link', cls: 'coin-bnb' },
+  { id: 'btc', label: 'Bitcoin', sub: 'BTC', address: 'bc1pz44l2geczxek8x4x3c4zuwj38jhe5wzwyu0p0u9acq9hqk7gl7xqjxkkpe', icon: 'currency_bitcoin', cls: 'coin-btc' },
+  { id: 'eth', label: 'Ethereum', sub: 'ERC20', address: '0xcb99F30f47C44943d3098B7D7F97F3D3ef529B48', icon: 'currency_exchange', cls: 'coin-eth' },
+  { id: 'sol', label: 'Solana', sub: 'SOL', address: 'C44bkxke2YxGoTnkUHr2kMsy3xTJJQ2aPwjYvnrUPNBB', icon: 'bolt', cls: 'coin-sol' },
+  { id: 'ton', label: 'TON', sub: 'TON Chain', address: 'UQD5-a9lQ9hC9C1nAkg5kMZuf7NmqIcSuJAjxzzBKj5H7T6K', icon: 'send', cls: 'coin-ton' },
+  { id: 'ltc', label: 'Litecoin', sub: 'LTC', address: 'ltc1qmfghpjqgzeln6y0tp44r7ccv73q70azn5h9zk6', icon: 'flash_on', cls: 'coin-ltc' }
+];
+
+const grid = document.getElementById('grid');
+const modal = document.getElementById('modal');
+const modalTitle = document.getElementById('modal-title');
+const modalBody = document.getElementById('modal-body');
+const modalCoin = document.getElementById('modal-coin');
+const modalAddr = document.getElementById('modal-addr');
+const modalCopyBtn = document.getElementById('modal-copy-btn');
+const modalClose = document.getElementById('modal-close');
+let lastCopied = '';
+let lastLabel = '';
+
+data.forEach((d, i) => {
+  const el = document.createElement('div');
+  el.className = `grid-item ${d.cls}`;
+  el.innerHTML = `
+    <div class="icon"><span class="material-icons-round">${d.icon}</span></div>
+    <div class="name">${d.label}</div>
+    <div class="net">${d.sub}</div>
+  `;
+  el.addEventListener('click', () => {
+    copyText(d.address, d.label + ' address copied');
+    showModal(d.label, d.address, d.sub);
+  });
+  grid.appendChild(el);
+});
+
+function showModal(label, address, network) {
+  lastCopied = address;
+  lastLabel = label;
+  modalCoin.textContent = label + ' (' + network + ')';
+  modalAddr.textContent = address;
+  modal.classList.add('show');
+}
+
+function hideModal() {
+  modal.classList.remove('show');
+}
+
+modal.addEventListener('click', e => {
+  if (e.target === modal) hideModal();
+});
+
+modalClose.addEventListener('click', () => {
+  hideModal();
+});
+
+modalCopyBtn.addEventListener('click', () => {
+  copyText(lastCopied, 'Copied again');
+});
+
+// click QR to download
+document.getElementById('qr-wrap').addEventListener('click', function(e) {
+  e.preventDefault();
+  const img = document.getElementById('featured-qr-img');
+  fetch(img.src)
+    .then(r => r.blob())
+    .then(blob => {
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'binance-pay-qr.png';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      window.URL.revokeObjectURL(url);
+      showToast('QR saved');
+    })
+    .catch(() => {
+      const a = document.createElement('a');
+      a.href = img.src;
+      a.download = 'binance-pay-qr.png';
+      a.target = '_blank';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      showToast('QR saved');
+    });
+});
+
+// Copy handler
+document.addEventListener('click', e => {
+  const btn = e.target.closest('.copy-btn');
+  if (!btn) return;
+  copyText(btn.getAttribute('data'), 'Copied to clipboard');
+});
+
+const toast = document.getElementById('toast');
+const toastText = document.getElementById('toast-text');
+
+function copyText(text, msg) {
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(text).then(() => showToast(msg));
+  } else {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    ta.remove();
+    showToast(msg);
+  }
+}
+
+function showToast(msg) {
+  toastText.textContent = msg;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 2000);
+}
+</script>
+
+</body>
+  </html>
